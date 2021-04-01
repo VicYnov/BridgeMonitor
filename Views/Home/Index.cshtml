@@ -4,11 +4,26 @@
 
 @model List<BridgeMonitor_Model>
 
-<h1>Liste des stations</h1>
+<h1>Prochaine fermeture</h1>
 
 <ul>
-    @foreach (var Bridges in Model)
+    @{
+        Model.Sort((a, b) => a.ClosingDate.CompareTo(b.ClosingDate));
+    }
+
+    @foreach (var heures in Model)
     {
-        <li>@Bridges.ClosingDate</li>
+        var d1 = Convert.ToDateTime(DateTime.Now.ToString());
+        var d2 = Convert.ToDateTime(@heures.ClosingDate);
+        var d3 = Convert.ToDateTime(@heures.ReopeningDate);
+
+        int result = DateTime.Compare(d2, d1);
+
+        if (result == 1)
+        {
+            <li>La prochaine date de fermeture est @d2</li>
+            <li>Et la prochaine date de réouverture après cette fermeture est @d3</li>
+            break;
+        }
     }
 </ul>
