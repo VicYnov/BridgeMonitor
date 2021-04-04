@@ -15,4 +15,3 @@ public class BridgeMonitor_Model
     [JsonProperty("reopening_date")]
     public DateTime ReopeningDate { get; set; }
 }
-

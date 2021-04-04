@@ -4,7 +4,7 @@
 
 @model List<BridgeMonitor_Model>
 
-<h1>Prochaine fermeture</h1>
+<h1 class="text-center">Prochaine fermeture</h1>
 
 <ul>
     @{
@@ -22,11 +22,29 @@
 
         if (result == 1)
         {
-            <li>La prochaine date de fermeture est @d2</li>
-            <li>Et la prochaine date de réouverture après cette fermeture est @d3</li>
-            <li>Le bateau responsable de cette fermeture est : @evenement</li>
             var dureeFermeture = @d3 - @d2;
-            <li>La durée de la fermeture est de @dureeFermeture</li>
+            <div class="text-center">
+                <p>La prochaine date de fermeture est @d2</p>
+                <p>Et la prochaine date de réouverture après cette fermeture est @d3</p>
+                <p>Le bateau responsable de cette fermeture est : @evenement</p>
+                <p>La durée de la fermeture est de @dureeFermeture</p>
+            </div>
+            <div class="text-center">
+                <p>
+                    Risque de bouchon :
+                    @if (heures.ClosingDate.Hour.Equals(7) ||
+                       heures.ClosingDate.Hour.Equals(8) ||
+                       heures.ClosingDate.Hour.Equals(17) ||
+                       heures.ClosingDate.Hour.Equals(18))
+                    {
+                        <text>élevé</text>;
+                    }
+                    else
+                    {
+                        <text>faible</text>;
+                    }
+                </p>
+            </div>
             break;
         }
     }
